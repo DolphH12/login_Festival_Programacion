@@ -37,10 +37,7 @@ class LoginWidget extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Colors.lightGreen),
-                        onPressed: () {
-                          print(userController.text);
-                          print(passController.text);
-                        },
+                        onPressed: () {},
                         child: const Text("Login"))),
               ),
               Row(
