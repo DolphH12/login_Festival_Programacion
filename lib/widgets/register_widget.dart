@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/services/services_ingreso.dart';
 import 'package:login_app/widgets/titulo_widget.dart';
 
 class RegisterWidget extends StatelessWidget {
@@ -6,9 +7,11 @@ class RegisterWidget extends StatelessWidget {
 
   final TextEditingController userController = TextEditingController();
   final TextEditingController passController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final ingresoServices = IngresoServices();
     return SafeArea(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -18,6 +21,9 @@ class RegisterWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const TituloWidget(mensaje: "Registrate"),
+              const SizedBox(
+                height: 40,
+              ),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
@@ -41,18 +47,8 @@ class RegisterWidget extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                 child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: userController,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: "Celular"),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-                child: TextField(
                   keyboardType: TextInputType.visiblePassword,
-                  controller: userController,
+                  controller: emailController,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: "Email"),
                 ),
@@ -66,7 +62,14 @@ class RegisterWidget extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Colors.lightGreen),
-                        onPressed: () {},
+                        onPressed: () {
+                          ingresoServices.register(userController.text,
+                              passController.text, emailController.text);
+                          Navigator.pushNamed(context, "otp", arguments: [
+                            userController.text,
+                            emailController.text
+                          ]);
+                        },
                         child: const Text("Registrarse"))),
               ),
               Row(

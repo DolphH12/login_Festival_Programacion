@@ -18,8 +18,8 @@ class FormWidget extends StatelessWidget {
       child: TextField(
         controller: controllerText,
         obscureText: obscure,
-        decoration:
-            InputDecoration(border: OutlineInputBorder(), labelText: label),
+        decoration: InputDecoration(
+            border: const OutlineInputBorder(), labelText: label),
       ),
     );
   }

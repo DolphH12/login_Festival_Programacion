@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:login_app/services/services_ingreso.dart';
+import 'package:login_app/user_preferences/user_preferences.dart';
 import 'package:login_app/widgets/form_widget.dart';
 import 'package:login_app/widgets/titulo_widget.dart';
 
@@ -10,6 +12,9 @@ class LoginWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final prefs = PreferenciasUsuario();
+    print("PRIMEROOO: ${prefs.token}");
+    final ingresoServices = IngresoServices();
     return SafeArea(
       child: SingleChildScrollView(
         child: SizedBox(
@@ -37,7 +42,10 @@ class LoginWidget extends StatelessWidget {
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             primary: Colors.lightGreen),
-                        onPressed: () {},
+                        onPressed: () {
+                          ingresoServices.login(
+                              userController.text, passController.text);
+                        },
                         child: const Text("Login"))),
               ),
               Row(
